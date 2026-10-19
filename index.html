@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Secure Share – password-protected PDFs</title>
+<meta name="description" content="Add a password, watermark and validity date to a PDF. Runs entirely in your browser; files are never uploaded.">
+<meta name="theme-color" content="#0f6b5c">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+<h1>Secure Share</h1>
+<p class="lead">Turn a PDF into a password-protected PDF with a watermark and a validity date. It opens in any PDF reader and asks for the password first. Your file never leaves your device.</p>
+
+<fieldset><legend>File</legend>
+<label class="drop" id="d1" for="f1">Tap to choose a PDF (or a JPG/PNG image)</label>
+<input id="f1" type="file" accept="application/pdf,image/jpeg,image/png,.pdf,.jpg,.jpeg,.png" hidden>
+<p class="hint">Have a Word file? Export it as PDF first, then choose it here.</p>
+</fieldset>
+
+<fieldset><legend>Password</legend>
+<label for="pw">Password the recipient must enter</label>
+<input id="pw" type="text" autocomplete="off" autocapitalize="off" spellcheck="false">
+<div class="row"><button type="button" id="gen">Generate a strong password</button></div>
+<label class="chk"><input id="lock" type="checkbox" checked><span>Block copying and editing (printing stays allowed)</span></label>
+<p class="hint">Send the password by a different channel than the file.</p>
+</fieldset>
+
+<fieldset><legend>Watermark</legend>
+<label for="wm">Watermark text (optional)</label>
+<input id="wm" type="text" placeholder="Confidential – prepared for Acme Ltd">
+<p class="hint">Stamped diagonally across every page.</p>
+</fieldset>
+
+<fieldset><legend>Validity date</legend>
+<label for="exp">Print “Valid until” on every page</label>
+<input id="exp" type="datetime-local">
+<div class="row"><button type="button" data-d="1">1 day</button><button type="button" data-d="7">7 days</button><button type="button" data-d="30">30 days</button><button type="button" data-d="0">None</button></div>
+<p class="hint">Shown on the document, not enforced. A PDF can’t lock itself after a date.</p>
+</fieldset>
+
+<button class="go" id="make" disabled>Create protected PDF</button>
+<div class="msg" id="m1" role="status"></div>
+<div class="box" id="o1" hidden></div>
+<p class="foot">Encryption: AES-256 PDF standard. Works offline once loaded.</p>
+</main>
+<script src="/vendor/pdf-lib.min.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
